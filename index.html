@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#145b4b">
+<title>مدرسة الرحمة لتحفيظ القرآن الكريم</title>
+<style>
+:root{--green:#145b4b;--green2:#1b7560;--gold:#c99b4e;--ink:#23332e;--muted:#718078;--bg:#f4f7f5;--line:#e2eae5;--white:#fff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Tahoma,Arial,sans-serif}
+button,input,select,textarea{font:inherit}button{cursor:pointer}
+.top{background:linear-gradient(120deg,#104b3e,#1b7560);color:white;padding:16px 22px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px}.brand img{width:54px;height:54px;object-fit:contain;background:white;border-radius:12px;padding:3px}.brand h1{font-size:19px;margin:0 0 5px}.brand p{margin:0;color:#d9eee5;font-size:12px}
+.topright{display:flex;gap:8px;align-items:center}.pill{border:1px solid #ffffff55;border-radius:30px;padding:8px 12px;font-size:12px}
+.layout{max-width:1250px;margin:22px auto;padding:0 16px;display:grid;grid-template-columns:230px 1fr;gap:18px}
+.side,.panel,.stat{background:white;border:1px solid var(--line);border-radius:16px;box-shadow:0 3px 14px #153d2b08}
+.side{padding:12px;height:max-content;position:sticky;top:12px}.nav{width:100%;border:0;background:transparent;text-align:right;padding:12px;border-radius:10px;color:#40554b;margin:2px 0}.nav.active,.nav:hover{background:#eaf4ef;color:var(--green);font-weight:bold}
+main{min-width:0}.welcome{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:2px 0 16px}.welcome h2{margin:0 0 6px;font-size:22px}.muted{color:var(--muted);font-size:13px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}.stat{padding:16px}.stat .n{font-size:27px;font-weight:bold;color:var(--green);margin-top:8px}
+.panel{padding:18px;margin-bottom:15px}.panel h3{margin:0 0 14px;font-size:17px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.btn{border:0;background:var(--green);color:white;border-radius:10px;padding:10px 15px}.btn:hover{background:var(--green2)}.btn.secondary{background:#eaf3ef;color:var(--green)}.btn.gold{background:var(--gold);color:#fff}.btn.danger{background:#a93d3d}
+.actions{display:flex;gap:8px;flex-wrap:wrap}.field{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}.field label{font-size:13px;color:#52645b}.field input,.field select,.field textarea{border:1px solid #d7e2db;border-radius:9px;padding:11px;background:#fff;min-width:0}.field textarea{min-height:75px;resize:vertical}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.row .field{flex:1;min-width:150px}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:right;padding:11px 9px;border-bottom:1px solid var(--line)}th{background:#f5f8f6;color:#4e6258}
+.empty{text-align:center;color:var(--muted);padding:26px}.tag{display:inline-block;background:#edf5f0;color:var(--green);padding:4px 8px;border-radius:20px;font-size:11px}
+.login{max-width:410px;margin:8vh auto;padding:24px;background:white;border:1px solid var(--line);border-radius:18px;text-align:center}.login img{height:90px;max-width:140px;object-fit:contain}.login h2{color:var(--green)}.hidden{display:none!important}
+footer{text-align:center;color:#84938b;font-size:11px;padding:20px}
+@media(max-width:850px){.layout{grid-template-columns:1fr}.side{position:static;display:flex;overflow:auto;gap:4px}.nav{white-space:nowrap;width:auto}.stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.top{padding:13px}.brand h1{font-size:15px}.brand img{width:45px;height:45px}.layout{margin:12px auto;padding:0 10px;gap:10px}.panel{padding:13px}.stats{gap:8px}.stat{padding:12px}.stat .n{font-size:22px}.grid2{grid-template-columns:1fr}.welcome{align-items:flex-start;flex-direction:column}table{min-width:560px}.tablewrap{overflow:auto}}
+</style>
+</head>
+<body>
+<header class="top">
+ <div class="brand"><img src="assets/mark_school.jpg" onerror="this.style.display='none'"><div><h1>مدرسة الرحمة لتحفيظ القرآن الكريم</h1><p>التابعة لمركز الإخاء لتحفيظ القرآن الكريم</p></div></div>
+ <div class="topright"><span class="pill">جبل جرة – وادي القاضي – تعز</span><span class="pill" id="who">وضع تجريبي</span></div>
+</header>
+
+<section id="login" class="login">
+ <img src="assets/mark_center.png" onerror="this.src='assets/mark_school.jpg'">
+ <h2>مرحبًا بك في نظام الرحمة</h2><p class="muted">سجّل الدخول للمتابعة</p>
+ <div class="field"><label>اسم المستخدم</label><input id="username" value="admin" autocomplete="username"></div>
+ <div class="field"><label>كلمة المرور</label><input id="password" type="password" value="1234" autocomplete="current-password"></div>
+ <button class="btn" style="width:100%" onclick="login()">دخول</button>
+ <p class="muted">الدخول التجريبي: admin / 1234</p>
+</section>
+
+<div id="app" class="layout hidden">
+ <aside class="side">
+  <button class="nav active" data-page="home">⌂　الرئيسية</button>
+  <button class="nav" data-page="students">♙　الطلاب</button>
+  <button class="nav" data-page="rings">▤　الحلقات</button>
+  <button class="nav" data-page="teachers">♧　المعلمون</button>
+  <button class="nav" data-page="attendance">✓　الحضور والغياب</button>
+  <button class="nav" data-page="memorization">۞　الحفظ والمراجعة</button>
+  <button class="nav" data-page="announcements">▣　الإعلانات</button>
+  <button class="nav" data-page="reports">▥　التقارير</button>
+  <button class="nav" onclick="logout()">↪　تسجيل الخروج</button>
+ </aside>
+ <main>
+  <div class="welcome"><div><h2 id="pageTitle">لوحة التحكم</h2><div class="muted">إدارة شؤون مدرسة الرحمة من مكان واحد</div></div><span class="tag">الإدارة</span></div>
+  <div id="content"></div>
+ </main>
+</div>
+<footer>مدرسة الرحمة لتحفيظ القرآن الكريم · نسخة أولية تجريبية</footer>
+
+<script>
+const $=id=>document.getElementById(id);
+const load=(k,d)=>{try{return JSON.parse(localStorage.getItem('rahma_'+k))??d}catch{return d}};
+const save=(k,v)=>localStorage.setItem('rahma_'+k,JSON.stringify(v));
+let data={students:load('students',[]),rings:load('rings',[]),teachers:load('teachers',[]),attendance:load('attendance',[]),memorization:load('memorization',[]),announcements:load('announcements',[])};
+let page='home';
+function persist(k){save(k,data[k])}
+function login(){if($('username').value==='admin'&&$('password').value==='1234'){$('login').classList.add('hidden');$('app').classList.remove('hidden');$('who').textContent='المدير';render()}else alert('بيانات الدخول غير صحيحة')}
+function logout(){$('app').classList.add('hidden');$('login').classList.remove('hidden')}
+document.querySelectorAll('.nav[data-page]').forEach(b=>b.addEventListener('click',()=>{page=b.dataset.page;document.querySelectorAll('.nav').forEach(x=>x.classList.toggle('active',x===b));render()}));
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function shell(title,body){$('pageTitle').textContent=title;$('content').innerHTML=body}
+function render(){
+ if(page==='home'){shell('لوحة التحكم',`<div class="stats">
+ <div class="stat">إجمالي الطلاب<div class="n">${data.students.length}</div></div><div class="stat">الحلقات<div class="n">${data.rings.length}</div></div><div class="stat">المعلمون<div class="n">${data.teachers.length}</div></div><div class="stat">الإعلانات<div class="n">${data.announcements.length}</div></div></div>
+ <div class="panel"><h3>مرحبًا بك في إدارة مدرسة الرحمة</h3><p class="muted">من هنا يمكنك إدارة الطلاب والحلقات والمعلمين وتسجيل الحضور ومتابعة الحفظ والمراجعة.</p><div class="actions"><button class="btn" onclick="go('students')">إضافة طالب</button><button class="btn secondary" onclick="go('rings')">إضافة حلقة</button><button class="btn secondary" onclick="go('attendance')">تسجيل الحضور</button></div></div>
+ <div class="panel"><h3>آخر الإعلانات</h3>${data.announcements.slice(-3).reverse().map(a=>`<p>• ${esc(a.text)} <span class="muted">${esc(a.date)}</span></p>`).join('')||'<div class="empty">لا توجد إعلانات حتى الآن</div>'}</div>`)}
+ if(page==='students'){shell('إدارة الطلاب',`<div class="panel"><h3>إضافة طالب جديد</h3><div class="row"><div class="field"><label>اسم الطالب</label><input id="sname" placeholder="الاسم الرباعي"></div><div class="field"><label>العمر</label><input id="sage" type="number" min="4" placeholder="العمر"></div><div class="field"><label>الحلقة</label><select id="sring"><option value="">اختر الحلقة</option>${data.rings.map(r=>`<option>${esc(r.name)}</option>`).join('')}</select></div></div><div class="row"><div class="field"><label>اسم ولي الأمر</label><input id="sguard" placeholder="اسم ولي الأمر"></div><div class="field"><label>رقم التواصل</label><input id="sphone" placeholder="رقم الهاتف"></div></div><button class="btn" onclick="addStudent()">حفظ الطالب</button></div><div class="panel"><h3>سجل الطلاب (${data.students.length})</h3>${table(['الاسم','العمر','الحلقة','ولي الأمر','الهاتف','إجراء'],data.students.map((s,i)=>[s.name,s.age||'—',s.ring||'—',s.guard||'—',s.phone||'—',`<button class="btn danger" onclick="removeItem('students',${i})">حذف</button>`]))}</div>`)}
+ if(page==='rings'){shell('إدارة الحلقات',`<div class="panel"><h3>إضافة حلقة</h3><div class="row"><div class="field"><label>اسم الحلقة</label><input id="rname" placeholder="مثال: حلقة قيم القرآنية"></div><div class="field"><label>المعلم المسؤول</label><input id="rteacher" placeholder="اسم المعلم"></div><div class="field"><label>وقت الحلقة</label><input id="rtime" placeholder="مثال: 5:00 مساءً"></div></div><button class="btn" onclick="addRing()">إضافة الحلقة</button></div><div class="panel"><h3>الحلقات المسجلة</h3>${table(['اسم الحلقة','المعلم','الوقت','إجراء'],data.rings.map((r,i)=>[r.name,r.teacher||'—',r.time||'—',`<button class="btn danger" onclick="removeItem('rings',${i})">حذف</button>`]))}</div>`)}
+ if(page==='teachers'){shell('إدارة المعلمين',`<div class="panel"><h3>إضافة معلم</h3><div class="row"><div class="field"><label>اسم المعلم</label><input id="tname" placeholder="الاسم"></div><div class="field"><label>رقم الهاتف</label><input id="tphone" placeholder="رقم التواصل"></div><div class="field"><label>التخصص / الحلقة</label><input id="trole" placeholder="المهمة أو الحلقة"></div></div><button class="btn" onclick="addTeacher()">حفظ المعلم</button></div><div class="panel"><h3>المعلمون</h3>${table(['الاسم','الهاتف','المهمة','إجراء'],data.teachers.map((t,i)=>[t.name,t.phone||'—',t.role||'—',`<button class="btn danger" onclick="removeItem('teachers',${i})">حذف</button>`]))}</div>`)}
+ if(page==='attendance'){shell('الحضور والغياب',`<div class="panel"><h3>تسجيل حالة طالب</h3><div class="row"><div class="field"><label>الطالب</label><select id="astudent"><option value="">اختر الطالب</option>${data.students.map(s=>`<option>${esc(s.name)}</option>`).join('')}</select></div><div class="field"><label>التاريخ</label><input id="adate" type="date" value="${new Date().toISOString().slice(0,10)}"></div><div class="field"><label>الحالة</label><select id="astatus"><option>حاضر</option><option>غائب</option><option>متأخر</option><option>بعذر</option></select></div></div><button class="btn" onclick="addAttendance()">حفظ السجل</button></div><div class="panel"><h3>سجل الحضور</h3>${table(['الطالب','التاريخ','الحالة','إجراء'],data.attendance.map((a,i)=>[a.student,a.date,a.status,`<button class="btn danger" onclick="removeItem('attendance',${i})">حذف</button>`]))}</div>`)}
+ if(page==='memorization'){shell('الحفظ والمراجعة',`<div class="panel"><h3>تسجيل إنجاز الطالب</h3><div class="row"><div class="field"><label>الطالب</label><select id="mstudent"><option value="">اختر الطالب</option>${data.students.map(s=>`<option>${esc(s.name)}</option>`).join('')}</select></div><div class="field"><label>السورة</label><input id="msura" placeholder="اسم السورة"></div><div class="field"><label>من آية</label><input id="mfrom" type="number"></div><div class="field"><label>إلى آية</label><input id="mto" type="number"></div></div><div class="row"><div class="field"><label>نوع الإنجاز</label><select id="mtype"><option>حفظ جديد</option><option>مراجعة</option><option>تثبيت</option></select></div><div class="field"><label>التقييم</label><select id="mgrade"><option>ممتاز</option><option>جيد جدًا</option><option>جيد</option><option>يحتاج متابعة</option></select></div></div><button class="btn" onclick="addMem()">حفظ الإنجاز</button></div><div class="panel"><h3>سجل الإنجاز</h3>${table(['الطالب','السورة والآيات','النوع','التقييم','التاريخ','إجراء'],data.memorization.map((m,i)=>[m.student,`${m.sura} (${m.from||'؟'}–${m.to||'؟'})`,m.type,m.grade,m.date,`<button class="btn danger" onclick="removeItem('memorization',${i})">حذف</button>`]))}</div>`)}
+ if(page==='announcements'){shell('الإعلانات',`<div class="panel"><h3>نشر إعلان</h3><div class="field"><label>نص الإعلان</label><textarea id="antext" placeholder="اكتب إعلان المدرسة أو تنبيه أولياء الأمور..."></textarea></div><button class="btn" onclick="addAnnouncement()">نشر في لوحة التطبيق</button></div><div class="panel"><h3>الإعلانات السابقة</h3>${data.announcements.slice().reverse().map(a=>`<p>${esc(a.text)} <span class="muted">— ${esc(a.date)}</span></p>`).join('')||'<div class="empty">لا توجد إعلانات</div>'}</div>`)}
+ if(page==='reports'){shell('التقارير',`<div class="panel"><h3>ملخص المدرسة</h3><div class="stats"><div class="stat">الطلاب<div class="n">${data.students.length}</div></div><div class="stat">الحلقات<div class="n">${data.rings.length}</div></div><div class="stat">المعلمون<div class="n">${data.teachers.length}</div></div><div class="stat">سجلات الحضور<div class="n">${data.attendance.length}</div></div></div><button class="btn" onclick="exportData()">تصدير نسخة احتياطية JSON</button> <button class="btn secondary" onclick="window.print()">طباعة التقرير</button><p class="muted">هذه تقارير أولية من البيانات المسجلة على هذا الجهاز.</p></div>`)}
+}
+function go(p){page=p;document.querySelectorAll('.nav').forEach(x=>x.classList.toggle('active',x.dataset.page===p));render()}
+function table(headers,rows){if(!rows.length)return '<div class="empty">لا توجد بيانات مسجلة بعد</div>';return `<div class="tablewrap"><table><thead><tr>${headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`}
+function val(id){return $(id)?.value.trim()||''}
+function addStudent(){let name=val('sname');if(!name)return alert('أدخل اسم الطالب');data.students.push({name,age:val('sage'),ring:val('sring'),guard:val('sguard'),phone:val('sphone')});persist('students');render()}
+function addRing(){let name=val('rname');if(!name)return alert('أدخل اسم الحلقة');data.rings.push({name,teacher:val('rteacher'),time:val('rtime')});persist('rings');render()}
+function addTeacher(){let name=val('tname');if(!name)return alert('أدخل اسم المعلم');data.teachers.push({name,phone:val('tphone'),role:val('trole')});persist('teachers');render()}
+function addAttendance(){if(!val('astudent'))return alert('اختر الطالب');data.attendance.push({student:val('astudent'),date:val('adate'),status:val('astatus')});persist('attendance');render()}
+function addMem(){if(!val('mstudent'))return alert('اختر الطالب');data.memorization.push({student:val('mstudent'),sura:val('msura'),from:val('mfrom'),to:val('mto'),type:val('mtype'),grade:val('mgrade'),date:new Date().toLocaleDateString('ar')});persist('memorization');render()}
+function addAnnouncement(){let text=val('antext');if(!text)return alert('اكتب نص الإعلان');data.announcements.push({text,date:new Date().toLocaleDateString('ar')});persist('announcements');render()}
+function removeItem(k,i){if(confirm('هل تريد حذف هذا السجل؟')){data[k].splice(i,1);persist(k);render()}}
+function exportData(){let blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='rahma-school-backup.json';a.click();URL.revokeObjectURL(a.href)}
+</script>
+</body></html>

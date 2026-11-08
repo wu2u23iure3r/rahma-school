@@ -1,0 +1,196 @@
+# مدرسة الرحمة لتحفيظ القرآن الكريم
+
+نظام إدارة مدرسة الرحمة لتحفيظ القرآن الكريم.
+
+## الجهة التابعة لها
+مركز الإخاء لتحفيظ القرآن الكريم.
+
+## الموقع
+جبل جرة – وادي القاضي – تعز.
+
+## شعار المدرسة
+خيركم من تعلم القرآن وعلمه.
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مدرسة الرحمة لتحفيظ القرآن الكريم</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Tahoma,Arial;background:#f4f7f4;color:#24352b}
+header{background:#176b43;color:white;padding:22px;text-align:center}
+header h2{margin:5px}
+header p{margin:8px 0 0}
+nav{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;padding:12px;background:white}
+button{border:0;border-radius:8px;padding:11px 16px;background:#176b43;color:white;cursor:pointer;font-size:15px}
+nav button{background:#e6f0e9;color:#176b43}
+main{max-width:900px;margin:20px auto;padding:12px}
+.card{background:white;padding:18px;border-radius:12px;margin-bottom:15px;box-shadow:0 2px 8px #0001}
+h3{color:#176b43}
+input,select{width:100%;padding:12px;margin:7px 0;border:1px solid #ccd8ce;border-radius:7px;font-size:15px}
+.stat{display:inline-block;background:#e6f0e9;padding:15px;margin:5px;border-radius:9px;min-width:120px;text-align:center}
+.page{display:none}
+.page.active{display:block}
+table{width:100%;border-collapse:collapse}
+td,th{padding:10px;border-bottom:1px solid #ddd;text-align:right}
+footer{text-align:center;color:#667;padding:20px}
+</style>
+</head>
+<body>
+
+<header>
+<h2>مدرسة الرحمة لتحفيظ القرآن الكريم</h2>
+<div>التابعة لمركز الإخاء لتحفيظ القرآن الكريم</div>
+<p>جبل جرة – وادي القاضي – تعز</p>
+<p>خيركم من تعلم القرآن وعلمه</p>
+</header>
+
+<nav>
+<button onclick="show('home')">الرئيسية</button>
+<button onclick="show('students')">الطلاب</button>
+<button onclick="show('rings')">الحلقات</button>
+<button onclick="show('teachers')">المعلمون</button>
+<button onclick="show('attendance')">الحضور</button>
+<button onclick="show('memorization')">الحفظ والمراجعة</button>
+</nav>
+
+<main>
+<section id="home" class="page active">
+<div class="card">
+<h3>مرحبًا بك في نظام مدرسة الرحمة</h3>
+<p>نظام أولي لتنظيم شؤون المدرسة ومتابعة الطلاب والحلقات.</p>
+<div class="stat">الطلاب<br><strong id="studentCount">0</strong></div>
+<div class="stat">الحلقات<br><strong id="ringCount">0</strong></div>
+<div class="stat">المعلمون<br><strong id="teacherCount">0</strong></div>
+</div>
+</section>
+
+<section id="students" class="page">
+<div class="card">
+<h3>إضافة طالب</h3>
+<input id="studentName" placeholder="اسم الطالب">
+<input id="studentAge" type="number" placeholder="العمر">
+<button onclick="addItem('students','studentName')">حفظ الطالب</button>
+</div>
+<div class="card"><h3>قائمة الطلاب</h3><div id="studentsList"></div></div>
+</section>
+
+<section id="rings" class="page">
+<div class="card">
+<h3>إضافة حلقة</h3>
+<input id="ringName" placeholder="اسم الحلقة">
+<button onclick="addItem('rings','ringName')">حفظ الحلقة</button>
+</div>
+<div class="card"><h3>الحلقات المسجلة</h3><div id="ringsList"></div></div>
+</section>
+
+<section id="teachers" class="page">
+<div class="card">
+<h3>إضافة معلم</h3>
+<input id="teacherName" placeholder="اسم المعلم">
+<button onclick="addItem('teachers','teacherName')">حفظ المعلم</button>
+</div>
+<div class="card"><h3>المعلمون</h3><div id="teachersList"></div></div>
+</section>
+
+<section id="attendance" class="page">
+<div class="card">
+<h3>تسجيل الحضور</h3>
+<input id="attendanceName" placeholder="اسم الطالب">
+<select id="attendanceStatus">
+<option>حاضر</option>
+<option>غائب</option>
+<option>متأخر</option>
+</select>
+<button onclick="saveAttendance()">حفظ الحضور</button>
+<div id="attendanceList"></div>
+</div>
+</section>
+
+<section id="memorization" class="page">
+<div class="card">
+<h3>متابعة الحفظ والمراجعة</h3>
+<input id="memorizationName" placeholder="اسم الطالب">
+<input id="memorizationPart" placeholder="السورة أو مقدار الحفظ">
+<input id="reviewPart" placeholder="مقدار المراجعة">
+<button onclick="saveMemorization()">حفظ المتابعة</button>
+<div id="memorizationList"></div>
+</div>
+</section>
+</main>
+
+<footer>مدرسة الرحمة لتحفيظ القرآن الكريم ©</footer>
+
+<script>
+function getData(key){
+return JSON.parse(localStorage.getItem(key)||'[]');
+}
+function setData(key,data){
+localStorage.setItem(key,JSON.stringify(data));
+}
+function show(id){
+document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+}
+function addItem(type,inputId){
+let input=document.getElementById(inputId);
+let value=input.value.trim();
+if(!value){alert('اكتب الاسم أولاً');return;}
+let data=getData(type);
+data.push(value);
+setData(type,data);
+input.value='';
+render();
+}
+function renderList(type,id){
+let data=getData(type);
+document.getElementById(id).innerHTML=data.map((v,i)=>
+'<p>'+ (i+1)+'. '+v+
+' <button onclick="removeItem(\''+type+'\','+i+')">حذف</button></p>'
+).join('')||'لا توجد بيانات حتى الآن';
+}
+function removeItem(type,index){
+let data=getData(type);
+data.splice(index,1);
+setData(type,data);
+render();
+}
+function saveAttendance(){
+let name=document.getElementById('attendanceName').value.trim();
+let status=document.getElementById('attendanceStatus').value;
+if(!name){alert('اكتب اسم الطالب');return;}
+let data=getData('attendance');
+data.push({name,status,date:new Date().toLocaleDateString('ar')});
+setData('attendance',data);
+document.getElementById('attendanceName').value='';
+render();
+}
+function saveMemorization(){
+let name=document.getElementById('memorizationName').value.trim();
+let part=document.getElementById('memorizationPart').value.trim();
+let review=document.getElementById('reviewPart').value.trim();
+if(!name){alert('اكتب اسم الطالب');return;}
+let data=getData('memorization');
+data.push({name,part,review});
+setData('memorization',data);
+document.getElementById('memorizationName').value='';
+document.getElementById('memorizationPart').value='';
+document.getElementById('reviewPart').value='';
+render();
+}
+function render(){
+renderList('students','studentsList');
+renderList('rings','ringsList');
+renderList('teachers','teachersList');
+document.getElementById('studentCount').textContent=getData('students').length;
+document.getElementById('ringCount').textContent=getData('rings').length;
+document.getElementById('teacherCount').textContent=getData('teachers').length;
+document.getElementById('attendanceList').innerHTML=getData('attendance').map(x=>'<p>'+x.name+' — '+x.status+' — '+x.date+'</p>').join('');
+document.getElementById('memorizationList').innerHTML=getData('memorization').map(x=>'<p>'+x.name+' — الحفظ: '+x.part+' — المراجعة: '+x.review+'</p>').join('');
+}
+render();
+</script>
+</body>
+</html>
